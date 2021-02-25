@@ -58,6 +58,7 @@ export class HeroService {
   }
 
   addHero(hero: Hero): Observable<Hero> {
+    // @ts-ignore
     return this.http.post<Hero>(this.herosUrl, hero, this.httpOptions).pipe(
       tap((newHero: Hero) => {
         this.log(`add hero w/ id=${newHero.id}`);
@@ -69,6 +70,7 @@ export class HeroService {
   deleteHero(hero: Hero | number) : Observable<Hero> {
     const id = typeof  hero === 'number' ? hero : hero.id;
     const url = `${this.herosUrl}/${id}`;
+    // @ts-ignore
     return this.http.delete<Hero>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted hero id=${id}`)),
       catchError(this.handleError<Hero>('deleteHero'))
